@@ -1,4 +1,4 @@
- import requests
+import requests
 import re
 
 def readFromURL(logs_url):
@@ -41,7 +41,32 @@ def uniqueIPs(log_file_name):
     # return the total number of unique IPs
     total_unque_IPs = len(unique_IPs)
 
-    print(total_unque_IPs)
+    # return
+    print('Total Unique IPs:', total_unque_IPs)
+    return total_unque_IPs
+
+def getMaxPostReq(log_file_name):
+    # decleaing the regex patter for POST
+    post = 'POST'
+
+    # initialize the list object
+    post_req = []
+
+    # open and read lines from file
+    with open(log_file_name) as current_file:
+        lines = current_file.readlines()
+        if not lines:
+            print('File is empty!')
+        else:
+            for line in lines:
+                if post in line:
+                    post_req.append(line)
+    
+
+    # return 
+    print('Total Post Request:', len(post_req))
+    return len(post_req)
+
 
 if __name__ == '__main__':
     logs_url = 'https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/apache_logs/apache_logs'
@@ -55,3 +80,6 @@ if __name__ == '__main__':
 
     # search maximum post requests
     uniqueIPs(log_file_name)
+
+    # find the max post req
+    getMaxPostReq(log_file_name)
